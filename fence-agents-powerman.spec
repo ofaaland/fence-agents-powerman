@@ -8,7 +8,7 @@
 Name: fence-agents-powerman
 Summary: Powerman Fence Agent
 Version: 4.0.11
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2+ and LGPLv2+
 Group: System Environment/Base
 Summary: Fence agent for powerman-controlled devices
