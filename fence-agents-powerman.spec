@@ -8,13 +8,13 @@
 Name: fence-agents-powerman
 Summary: Powerman Fence Agent
 Version: 4.0.11
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+ and LGPLv2+
 Group: System Environment/Base
 Summary: Fence agent for powerman-controlled devices
 URL: https://github.com/ofaaland/fence-agents-powerman
 Packager: Olaf Faaland <faaland1@llnl.gov>
-Source: %{name}.tgz
+Source: %{name}-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 Requires: python
@@ -26,7 +26,7 @@ Powerman Fence Agent is a script to enable pacemaker to handle power management
 for clusters using powerman.
 
 %prep
-%setup -n %{name}
+%setup -n %{name}-%{version}-%{release}
 
 #%install
 rm -rf %{buildroot}
@@ -41,5 +41,5 @@ rm -rf %{buildroot}
 %{_mandir}/man8/fence_powerman.8.gz
 
 %changelog
-* Fri Sep 30 2016 Olaf Faaland <faaland1@llnl.gov> - 4.0.11-1
+* Fri Sep 30 2016 Olaf Faaland <faaland1@llnl.gov> - 4.0.11-1ch6
 - fence_powerman: Add new fence agent
