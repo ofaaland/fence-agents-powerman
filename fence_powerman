@@ -82,7 +82,15 @@ class PowerMan:
 			logging.error("PowerMan Error: Popen: invalid arguments: %s\n", e)
 			return -1
 		logging.debug("result: %s ret_code: %s\n", result, ret_code)
-		return ret_code
+
+		## For some devices, the "on" or "off" command can fail silently,
+		## but for query powerman keeps trying until it gets a valid answer;
+		## so we must check after trying to power on/off a device.
+
+		if self.query(host) == "on":
+			return 0
+		else:
+			return -1
 
 	def off(self, host):
 		logging.debug("PowerMan off: %s\n", host)
@@ -96,7 +104,15 @@ class PowerMan:
 			logging.error("PowerMan Error: Popen: invalid arguments: %s\n", e)
 			return -1
 		logging.debug("%s\n", result)
-		return ret_code
+
+		## For some devices, the "on" or "off" command can fail silently,
+		## but for query powerman keeps trying until it gets a valid answer;
+		## so we must check after trying to power on/off a device.
+
+		if self.query(host) == "off":
+			return 0
+		else:
+			return -1
 
 	def list(self):
 		## Error checking here is faulty.  Try passing
