@@ -51,7 +51,7 @@ class PowerMan:
 			popen = subprocess.Popen(run_this, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 			out = popen.communicate()
 		except OSError as e:
-			logging.debug("_run command error: %s\n", e)
+			logging.error("_run command error: %s\n", e)
 			sys.exit(1)
 		if only_first_line == True:
 			result_line = out[0].decode().strip()
@@ -76,10 +76,10 @@ class PowerMan:
 		try:
 			result, ret_code = self._run(cmd, True)
 		except OSError as e:
-			logging.debug("PowerMan Error: The command '--on' failed: %s\n", e)
+			logging.error("PowerMan Error: The command '--on' failed: %s\n", e)
 			return -1
 		except ValueError as e:
-			logging.debug("PowerMan Error: Popen: invalid arguments: %s\n", e)
+			logging.error("PowerMan Error: Popen: invalid arguments: %s\n", e)
 			return -1
 		logging.debug("result: %s ret_code: %s\n", result, ret_code)
 		return ret_code
@@ -90,10 +90,10 @@ class PowerMan:
 		try:
 			result, ret_code = self._run(cmd, True)
 		except OSError as e:
-			logging.debug("PowerMan Error: The command '%s' failed: %s\n", cmd, e)
+			logging.error("PowerMan Error: The command '%s' failed: %s\n", cmd, e)
 			return -1
 		except ValueError as e:
-			logging.debug("PowerMan Error: Popen: invalid arguments: %s\n", e)
+			logging.error("PowerMan Error: Popen: invalid arguments: %s\n", e)
 			return -1
 		logging.debug("%s\n", result)
 		return ret_code
@@ -105,10 +105,10 @@ class PowerMan:
 		try:
 			result, ret_code = self._run(cmd, False)
 		except OSError as e:
-			logging.debug("PowerMan Error: The command '%s' failed: %s\n", cmd, e)
+			logging.error("PowerMan Error: The command '%s' failed: %s\n", cmd, e)
 			return -1
 		except ValueError as e:
-			logging.debug("PowerMan Error: Popen: invalid arguments: %s\n", e)
+			logging.error("PowerMan Error: Popen: invalid arguments: %s\n", e)
 			return -1
 		if ret_code < 0:
 			# there was an error with the command
@@ -127,10 +127,10 @@ class PowerMan:
 		try:
 			result, ret_code = self._run(cmd, True)
 		except OSError as e:
-			logging.debug("PowerMan Error: The command '%s' failed: %s\n", cmd, e)
+			logging.error("PowerMan Error: The command '%s' failed: %s\n", cmd, e)
 			return -1
 		except ValueError as e:
-			logging.debug("PowerMan Error: Popen: invalid arguments: %s\n", e)
+			logging.error("PowerMan Error: Popen: invalid arguments: %s\n", e)
 			return -1
 		if ret_code < 0:
 			# there was an error with the command
@@ -162,7 +162,7 @@ def get_power_status(conn, options):
 		status = pm.query(options['--plug'])
 		if isinstance(int, type(status)):
 			# query only returns ints on error
-			logging.debug("get_power_status: query returned %s\n", str(status))
+			logging.error("get_power_status: query returned %s\n", str(status))
 			fail(EC_STATUS)
 		return status
 
@@ -185,12 +185,12 @@ def reboot(conn, options):
 	pm = PowerMan(options['--ip'], options['--ipport'])
 	res = pm.off(options['--plug'])
 	if res < 0:
-		logging.debug("reboot: power off failed!\n")
+		logging.error("reboot: power off failed.\n")
 		return False
 	time.sleep(2)
 	res = pm.on(options['--plug'])
 	if res < 0:
-		logging.debug("reboot: power on failed!\n")
+		logging.error("reboot: power on failed.\n")
 		return False
 	return True
 
