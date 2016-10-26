@@ -86,7 +86,9 @@ class PowerMan:
 		## For some devices, the "on" or "off" command can fail silently,
 		## but for query powerman keeps trying until it gets a valid answer;
 		## so we must check after trying to power on/off a device.
+		## Powerman seems to report the old state if asked too quickly, wait a second.
 
+		time.sleep(1)
 		queryret = self.query(host)
 
 		if (ret_code == 0 and queryret == "off") or (ret_code < 0 and queryret == "on"):
@@ -113,7 +115,9 @@ class PowerMan:
 		## For some devices, the "on" or "off" command can fail silently,
 		## but for query powerman keeps trying until it gets a valid answer;
 		## so we must check after trying to power on/off a device.
+		## Powerman seems to report the old state if asked too quickly, wait a second.
 
+		time.sleep(1)
 		queryret = self.query(host)
 
 		if (ret_code == 0 and queryret == "on") or (ret_code < 0 and queryret == "off"):
