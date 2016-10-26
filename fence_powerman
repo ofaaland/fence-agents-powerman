@@ -81,13 +81,18 @@ class PowerMan:
 		except ValueError as e:
 			logging.error("PowerMan Error: Popen: invalid arguments: %s\n", e)
 			return -1
-		logging.debug("result: %s ret_code: %s\n", result, ret_code)
+		logging.debug("pm.on result: %s ret_code: %s\n", result, ret_code)
 
 		## For some devices, the "on" or "off" command can fail silently,
 		## but for query powerman keeps trying until it gets a valid answer;
 		## so we must check after trying to power on/off a device.
 
-		if self.query(host) == "on":
+		queryret = self.query(host)
+
+		if (ret_code == 0 and queryret == "off") or (ret_code < 0 and queryret == "on"):
+			logging.warning("command '%s' returned (%s) but query reported (%s) afterwards\n", cmd, result, queryret)
+
+		if queryret == "on":
 			return 0
 		else:
 			return -1
@@ -103,13 +108,18 @@ class PowerMan:
 		except ValueError as e:
 			logging.error("PowerMan Error: Popen: invalid arguments: %s\n", e)
 			return -1
-		logging.debug("%s\n", result)
+		logging.debug("pm.off result: %s ret_code: %s\n", result, ret_code)
 
 		## For some devices, the "on" or "off" command can fail silently,
 		## but for query powerman keeps trying until it gets a valid answer;
 		## so we must check after trying to power on/off a device.
 
-		if self.query(host) == "off":
+		queryret = self.query(host)
+
+		if (ret_code == 0 and queryret == "on") or (ret_code < 0 and queryret == "off"):
+			logging.warning("command '%s' returned (%s) but query reported (%s) afterwards\n", cmd, result, queryret)
+
+		if queryret == "off":
 			return 0
 		else:
 			return -1
