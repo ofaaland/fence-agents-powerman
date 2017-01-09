@@ -206,7 +206,7 @@ def get_list(conn, options):
 
 
 def define_new_opts():
-	all_opt["powerman-path"] = {
+	all_opt["powerman_path"] = {
 		"getopt" : ":",
 		"longopt" : "powerman-path",
 		"help" : "--powerman-path=[path]         Path to powerman binary",
@@ -222,7 +222,7 @@ def main():
 		'ipaddr',
 		'no_password',
 		'no_login',
-		'powerman-path',
+		'powerman_path',
 	]
 
 	atexit.register(atexit_handler)
