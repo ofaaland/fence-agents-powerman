@@ -172,7 +172,7 @@ def get_power_status(conn, options):
 		if pm.is_running():
 			logging.debug("Powerman is running\n")
 			return "on"
-		logging.debug("Powerman is NOT running\n")
+		logging.error("powerman is NOT running, unable to get status\n")
 		return "error"
 	else:
 		status = pm.query(options['--plug'])
@@ -250,6 +250,7 @@ Powerman management utility that was designed for LLNL systems."
 		fail_usage("Powerman not found or not executable at path " + options["--powerman-path"])
 
 	# call the fencing.fence_action function, passing in my various fence functions
+	# def fence_action(connection, options, set_power_fn, get_power_fn, get_outlet_list=None, reboot_cycle_fn=None)
 	result = fence_action(
 				None,
 				options,
