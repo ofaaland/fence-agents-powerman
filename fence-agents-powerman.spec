@@ -8,7 +8,7 @@
 Name: fence-agents-powerman
 Summary: Powerman Fence Agent
 Version: 4.0.11
-Release: 6%{?dist}
+Release: 9%{?dist}
 License: GPLv2+ and LGPLv2+
 Group: System Environment/Base
 Summary: Fence agent for powerman-controlled devices
@@ -41,5 +41,7 @@ rm -rf %{buildroot}
 %{_mandir}/man8/fence_powerman.8.gz
 
 %changelog
+* Mon Dec  2 2019 Olaf Faaland <faaland1@llnl.gov> - 4.0.11-9ch6
+- fence_powerman: Fix error checking in monitor action
 * Fri Sep 30 2016 Olaf Faaland <faaland1@llnl.gov> - 4.0.11-1ch6
 - fence_powerman: Add new fence agent
