@@ -10,7 +10,7 @@ packages to function.
 This is just a packaged version of the new fence agent.  The tree for
 the fence agents is at:
 
-https://github.com/ofaaland/fence-agents/tree/feature-powerman-try4/fence/agents
+https://github.com/ofaaland/fence-agents-powerman/
 
 For an introduction to fencing, see http://clusterlabs.org/doc/crm_fencing.html
 For other fence agents, see http://sourceware.org/cluster/wiki/
