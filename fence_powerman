@@ -152,12 +152,12 @@ class PowerMan:
 			# there was an error with the command
 			return ret_code
 		else:
+			if "No such nodes:" in result:
+				return -1
 			res = result.split('\n')
 			res = [r.split() for r in res]
 			# find the host in command's returned output
 			for lst in res:
-				if lst[0] == 'No' and lst[1] == 'such' and lst[2] == 'nodes:':
-					return -1
 				if host in lst:
 					return lst[0][:-1] # lst[0] would be 'off:'-- this removes the colon
 			# host isn't in the output
