@@ -8,7 +8,7 @@
 Name: fence-agents-powerman
 Summary: Powerman Fence Agent
 Version: 4.0.11
-Release: 9%{?dist}
+Release: 10llnl.%{?dist}
 License: GPLv2+ and LGPLv2+
 Group: System Environment/Base
 Summary: Fence agent for powerman-controlled devices
@@ -17,7 +17,7 @@ Packager: Olaf Faaland <faaland1@llnl.gov>
 Source: %{name}-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
-Requires: python
+Requires: /usr/libexec/platform-python
 Requires: fence-agents-common >= %{version}-%{release}
 Requires: powerman >= 2.3.1-1
 
@@ -41,6 +41,8 @@ rm -rf %{buildroot}
 %{_mandir}/man8/fence_powerman.8.gz
 
 %changelog
+* Fri Apr 23 2021 Olaf Faaland <faaland1@llnl.gov> - 4.0.11-10llnl
+- fence_powerman: Use platform-python for RHEL 8 compat
 * Mon Dec  2 2019 Olaf Faaland <faaland1@llnl.gov> - 4.0.11-9ch6
 - fence_powerman: Fix error checking in monitor action
 * Fri Sep 30 2016 Olaf Faaland <faaland1@llnl.gov> - 4.0.11-1ch6
